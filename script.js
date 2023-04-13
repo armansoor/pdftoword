@@ -1,64 +1,75 @@
-const fileInput = document.querySelector('#file-input');
-const pdfToWordBtn = document.querySelector('#pdf-to-word-btn');
-const wordToPdfBtn = document.querySelector('#word-to-pdf-btn');
-const output = document.querySelector('#output');
-const downloadLink = document.querySelector('#download');
+// Define variables for elements that will be manipulated
+const fileInput = document.getElementById('fileInput');
+const convertBtn = document.getElementById('convertBtn');
+const downloadLink = document.getElementById('downloadLink');
 
-// Function to validate uploaded file
-function validateFile() {
+// Add event listener for the Convert button
+convertBtn.addEventListener('click', async () => {
+  // Get the selected file
   const file = fileInput.files[0];
+  
+  // Check if a file was selected
   if (!file) {
-    output.innerHTML = 'Please select a file.';
-    downloadLink.innerHTML = '';
-    return false;
+    alert('Please select a file');
+    return;
   }
+  
+  // Determine the file type
   const fileType = file.type;
-  if (fileType !== 'application/pdf' && fileType !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-    output.innerHTML = 'Please select a PDF or Word document.';
-    downloadLink.innerHTML = '';
-    return false;
-  }
-  return true;
-}
-
-// Function to convert PDF to Word
-async function convertPDFToWord() {
-  if (!validateFile()) {
+  
+  // Convert PDF to Word
+  if (fileType === 'application/pdf') {
+    const pdfBytes = await file.arrayBuffer();
+    const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+    const text = await pdfDoc.extractText();
+    const doc = new docx.Document();
+    const paragraph = doc.addParagraph();
+    paragraph.addRun(text);
+    const packer = new docx.Packer();
+    const buffer = await packer.toBuffer(doc);
+    const convertedFile = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    
+    // Update the Download link with the converted file
+    downloadLink.href = URL.createObjectURL(convertedFile);
+    downloadLink.style.display = 'block';
+    
+  // Convert Word to PDF
+  } else if (fileType === 'application/msword' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = () => {
+      const convertedFile = new Blob([reader.result], { type: 'application/pdf' });
+      
+      // Update the Download link with the converted file
+      downloadLink.href = URL.createObjectURL(convertedFile);
+      downloadLink.style.display = 'block';
+    };
+    
+  // Invalid file type
+  } else {
+    alert('Invalid file type');
     return;
   }
-  try {
-    // Load the PDF document
-    const pdfBytes = await fileInput.files[0].arrayBuffer();
-    const pdfDoc = await PDFDocument.load(pdfBytes);
+});
 
-    // Extract the text from the PDF document
-    const text = await pdfDoc.saveAsBase64();
+// Make the Convert button responsive
+convertBtn.addEventListener('mouseenter', () => {
+  convertBtn.style.background = '#333';
+  convertBtn.style.color = '#fff';
+});
 
-    // Code to convert the text to Word
-    const wordBytes = window.atob(text);
-    const wordBlob = new Blob([wordBytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-    const wordUrl = URL.createObjectURL(wordBlob);
-    downloadLink.innerHTML = `<a href="${wordUrl}" download="converted.docx">Download Converted File</a>`;
-    output.innerHTML = '';
-  } catch (error) {
-    console.error(error);
-  }
-}
+convertBtn.addEventListener('mouseleave', () => {
+  convertBtn.style.background = '#fff';
+  convertBtn.style.color = '#333';
+});
 
-// Function to convert Word to PDF
-async function convertWordToPDF() {
-  if (!validateFile()) {
-    return;
-  }
-  try {
-    // Code to convert Word to PDF
-    output.innerHTML = "Word to PDF conversion is complete!";
-    downloadLink.innerHTML = '';
-  } catch (error) {
-    console.error(error);
-  }
-}
+// Make the Download link responsive
+downloadLink.addEventListener('mouseenter', () => {
+  downloadLink.style.background = '#333';
+  downloadLink.style.color = '#fff';
+});
 
-// Attach click event listeners to the buttons
-pdfToWordBtn.addEventListener('click', convertPDFToWord);
-wordToPdfBtn.addEventListener('click', convertWordToPDF);
+downloadLink.addEventListener('mouseleave', () => {
+  downloadLink.style.background = '#fff';
+  downloadLink.style.color = '#333';
+});
