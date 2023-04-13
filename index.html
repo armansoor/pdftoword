@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PDF Converter</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1>PDF Converter</h1>
+    </header>
+    <main>
+      <form>
+        <input type="file" id="file-input" name="file-input">
+        <div>
+          <button class="btn" type="button" id="pdf-to-word-btn">PDF to Word</button>
+          <button class="btn" type="button" id="word-to-pdf-btn">Word to PDF</button>
+        </div>
+      </form>
+      <div id="output"></div>
+    </main>
+    <footer>
+      <p>&copy; Abdur Rahman Mansoor 2023</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
