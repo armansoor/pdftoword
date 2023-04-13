@@ -1,36 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>PDF Converter</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <h1>PDF Converter</h1>
-    </header>
-    <main>
-      <form>
-        <div>
-          <label for="input-file">Select input file:</label>
-          <input type="file" id="input-file" name="input-file">
-        </div>
-        <div>
-          <label for="output-file">Select output file:</label>
-          <input type="file" id="output-file" name="output-file">
-        </div>
-        <div>
-          <button class="btn" type="button" id="pdf-to-word-btn">PDF to Word</button>
-          <button class="btn" type="button" id="word-to-pdf-btn">Word to PDF</button>
-        </div>
-      </form>
-      <div id="output"></div>
-    </main>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>File Converter</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.16.0/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docx@4.4.0/build/Docx.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>File Converter</h1>
+		<div class="input-container">
+			<label for="fileInput">Select a file:</label>
+			<input type="file" id="fileInput">
+		</div>
+		<button class="convert-btn" onclick="convert()">Convert</button>
+		<a href="" id="downloadLink" download="convertedFile" style="display:none;">Download</a>
+	</div>
     <footer>
       <p>&copy; 2023 Abdur Rahman Mansoor</p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
-    <script src="script.js"></script>
-  </body>
+	<script src="script.js"></script>
+</body>
 </html>
