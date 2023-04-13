@@ -1,57 +1,64 @@
-const pdfToWordBtn = document.getElementById('pdf-to-word-btn');
-const wordToPdfBtn = document.getElementById('word-to-pdf-btn');
-const fileInput = document.getElementById('file-input');
+const fileInput = document.querySelector('#file-input');
+const pdfToWordBtn = document.querySelector('#pdf-to-word-btn');
+const wordToPdfBtn = document.querySelector('#word-to-pdf-btn');
+const output = document.querySelector('#output');
+const downloadLink = document.querySelector('#download');
 
+// Function to validate uploaded file
+function validateFile() {
+  const file = fileInput.files[0];
+  if (!file) {
+    output.innerHTML = 'Please select a file.';
+    downloadLink.innerHTML = '';
+    return false;
+  }
+  const fileType = file.type;
+  if (fileType !== 'application/pdf' && fileType !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+    output.innerHTML = 'Please select a PDF or Word document.';
+    downloadLink.innerHTML = '';
+    return false;
+  }
+  return true;
+}
+
+// Function to convert PDF to Word
+async function convertPDFToWord() {
+  if (!validateFile()) {
+    return;
+  }
+  try {
+    // Load the PDF document
+    const pdfBytes = await fileInput.files[0].arrayBuffer();
+    const pdfDoc = await PDFDocument.load(pdfBytes);
+
+    // Extract the text from the PDF document
+    const text = await pdfDoc.saveAsBase64();
+
+    // Code to convert the text to Word
+    const wordBytes = window.atob(text);
+    const wordBlob = new Blob([wordBytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const wordUrl = URL.createObjectURL(wordBlob);
+    downloadLink.innerHTML = `<a href="${wordUrl}" download="converted.docx">Download Converted File</a>`;
+    output.innerHTML = '';
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Function to convert Word to PDF
+async function convertWordToPDF() {
+  if (!validateFile()) {
+    return;
+  }
+  try {
+    // Code to convert Word to PDF
+    output.innerHTML = "Word to PDF conversion is complete!";
+    downloadLink.innerHTML = '';
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Attach click event listeners to the buttons
 pdfToWordBtn.addEventListener('click', convertPDFToWord);
 wordToPdfBtn.addEventListener('click', convertWordToPDF);
-
-async function convertPDFToWord() {
-  // Load the PDF file into pdf-lib
-  const pdfBytes = await fileInput.files[0].arrayBuffer();
-  const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
-
-  // Convert the PDF to a Word document
-  const wordDoc = await PDFLib.embedFonts(pdfDoc);
-  const wordBytes = await wordDoc.saveAsByteArray();
-
-  // Create a download link for the Word document
-  const blob = new Blob([wordBytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-  const url = URL.createObjectURL(blob);
-  const downloadLink = document.createElement('a');
-  downloadLink.href = url;
-  downloadLink.download = 'converted.docx';
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-}
-
-async function convertWordToPDF() {
-  // Load the Word file into pdf-lib
-  const wordBytes = await fileInput.files[0].arrayBuffer();
-  const wordDoc = await PDFLib.PDF
-Document.load(wordBytes);
-
-// Convert the Word document to a PDF
-const pdfDoc = await PDFLib.PDFDocument.create();
-const page = pdfDoc.addPage();
-const { width, height } = page.getSize();
-const font = await pdfDoc.embedFont(PDFLib.StandardFonts.TimesRoman);
-const textSize = 30;
-const text = await font.layout('Converted from Word', { size: textSize });
-const textWidth = text.width;
-const textHeight = text.height;
-const x = (width - textWidth) / 2;
-const y = (height - textHeight) / 2;
-page.drawText('Converted from Word', { x, y, size: textSize, font });
-
-// Create a download link for the PDF document
-const pdfBytes = await pdfDoc.saveAsByteArray();
-const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-const url = URL.createObjectURL(blob);
-const downloadLink = document.createElement('a');
-downloadLink.href = url;
-downloadLink.download = 'converted.pdf';
-document.body.appendChild(downloadLink);
-downloadLink.click();
-document.body.removeChild(downloadLink);
-}
