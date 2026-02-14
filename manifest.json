@@ -1,0 +1,15 @@
+{
+  "name": "Kawaii PDF Converter",
+  "short_name": "KawaiiPDF",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff0f5",
+  "theme_color": "#ffb7b2",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ]
+}
