@@ -1,6 +1,6 @@
-# Kawaii PDF Converter ✨
+# PDF Converter ✨
 
-A cute, anime-themed PDF tool that runs entirely in your browser! No servers, no uploads, just pure magic.
+A PDF tool that runs entirely in your browser! No servers, no uploads, just pure magic.
 
 ## Features 🌟
 
@@ -12,7 +12,7 @@ A cute, anime-themed PDF tool that runs entirely in your browser! No servers, no
 - **Offline Capable**: Works without internet once loaded! Installable as an App (PWA).
 - **100% Private**: Your files never leave your device. All processing happens locally in your browser.
 
-## How to Use 💖
+## How to Use 
 
 1. **Select a File**: Drag and drop your file into the cloud zone or click "Choose File".
 2. **Choose Action**: Click the card for the conversion you want (e.g., "PDF to Word").
