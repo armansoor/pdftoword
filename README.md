@@ -1,7 +1,11 @@
 # Magic PDF Converter ✨
 
 A magical PDF tool that runs entirely in your browser! No servers, no uploads, just pure magic.
+# PDF Converter ✨
 
+A PDF tool that runs entirely in your browser! No servers, no uploads, just pure magic.
+
+https://armansoor.github.io/pdftoword/
 ## Features 🌟
 
 - **PDF to Word**: Convert your PDFs to editable Word documents (Text & Layout preservation).
@@ -12,7 +16,7 @@ A magical PDF tool that runs entirely in your browser! No servers, no uploads, j
 - **Offline Capable**: Works without internet once loaded! Installable as an App (PWA).
 - **100% Private**: Your files never leave your device. All processing happens locally in your browser.
 
-## How to Use 💖
+## How to Use 
 
 1. **Select a File**: Drag and drop your file into the cloud zone or click "Choose File".
 2. **Choose Action**: Click the card for the conversion you want (e.g., "PDF to Word").
@@ -36,5 +40,5 @@ If you want to run this on your own machine:
 
 ## Credits 🌸
 
-Made with love by Jules.
+Abdur Rahman Mansoor.
 Uses `pdf-lib`, `pdf.js`, `mammoth.js`, `docx`, and `FileSaver.js`.
