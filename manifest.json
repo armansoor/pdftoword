@@ -1,6 +1,6 @@
 {
-  "name": "Kawaii PDF Converter",
-  "short_name": "KawaiiPDF",
+  "name": "Magic PDF Converter",
+  "short_name": "MagicPDF",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fff0f5",

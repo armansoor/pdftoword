@@ -16,11 +16,11 @@ themeSwitch.addEventListener('change', () => {
     if (themeSwitch.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
-        updateMascot('Dark mode is cool! 😎');
+        updateMascot('Magic Night mode activated! 🌙');
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
-        updateMascot('Light mode is so bright! ☀️');
+        updateMascot('Magic Day mode shining! ☀️');
     }
 });
 
