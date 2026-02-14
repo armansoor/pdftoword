@@ -37,5 +37,5 @@ If you want to run this on your own machine:
 
 ## Credits 🌸
 
-Made with love by Jules.
+Abdur Rahman Mansoor.
 Uses `pdf-lib`, `pdf.js`, `mammoth.js`, `docx`, and `FileSaver.js`.
