@@ -1,26 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>File Converter</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.16.0/dist/pdf-lib.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docx@4.4.0/build/Docx.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawaii PDF Converter</title>
+    <meta name="description" content="Convert PDF to Word and more with a cute anime theme!">
+    <meta name="theme-color" content="#ffb7b2">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts for Anime Vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-	<div class="container">
-		<h1>File Converter</h1>
-		<div class="input-container">
-			<label for="fileInput">Select a file:</label>
-			<input type="file" id="fileInput">
-		</div>
-		<button class="convert-btn" onclick="convert()">Convert</button>
-		<a href="" id="downloadLink" download="convertedFile" style="display:none;">Download</a>
-	</div>
-    <footer>
-      <p>&copy; 2023 Abdur Rahman Mansoor</p>
-    </footer>
-	<script src="script.js"></script>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-magic"></i> KawaiiPDF
+            </div>
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch" />
+                <label for="theme-switch" class="switch-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </label>
+            </div>
+        </header>
+
+        <main>
+            <section class="mascot-container">
+                <div class="mascot" id="mascot">
+                    <!-- SVG Mascot will be injected or CSS based -->
+                    <div class="mascot-body">
+                        <div class="mascot-face">
+                            <div class="eye left"></div>
+                            <div class="eye right"></div>
+                            <div class="mouth"></div>
+                            <div class="cheeks"></div>
+                        </div>
+                    </div>
+                    <div class="mascot-bubble" id="mascot-text">
+                        Hi! Drop a file below to start! ✨
+                    </div>
+                </div>
+            </section>
+
+            <section class="converter-zone">
+                <div class="drop-zone" id="drop-zone">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p>Drag & Drop your file here</p>
+                    <button class="btn-primary" id="file-select-btn">Choose File</button>
+                    <input type="file" id="file-input" hidden>
+                </div>
+                <div class="file-info hidden" id="file-info">
+                    <p id="file-name">filename.pdf</p>
+                    <button class="btn-small" id="remove-file-btn"><i class="fas fa-times"></i></button>
+                </div>
+            </section>
+
+            <section class="options-grid hidden" id="conversion-options">
+                <h3>Convert To:</h3>
+                <div class="grid">
+                    <button class="option-card" data-action="pdf-to-word">
+                        <i class="fas fa-file-word"></i> Word
+                    </button>
+                    <button class="option-card" data-action="word-to-pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </button>
+                    <button class="option-card" data-action="pdf-to-jpg">
+                        <i class="fas fa-image"></i> JPG
+                    </button>
+                    <button class="option-card" data-action="jpg-to-pdf">
+                        <i class="fas fa-file-pdf"></i> Image to PDF
+                    </button>
+                    <button class="option-card" data-action="pdf-to-text">
+                        <i class="fas fa-file-alt"></i> Text
+                    </button>
+                     <button class="option-card" data-action="text-to-pdf">
+                        <i class="fas fa-file-pdf"></i> Text to PDF
+                    </button>
+                </div>
+            </section>
+
+             <section class="history-section hidden" id="history-section">
+                <h3>Recent Conversions</h3>
+                <ul id="history-list">
+                    <!-- History items will go here -->
+                </ul>
+                <button class="btn-secondary" id="clear-history">Clear History</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made with 💖 by Jules</p>
+        </footer>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/ui.js"></script>
+    <script src="js/converter.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('SW registered!', reg))
+                    .catch(err => console.log('SW failed!', err));
+            });
+        }
+    </script>
 </body>
 </html>

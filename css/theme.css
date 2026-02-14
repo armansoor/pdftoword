@@ -1,0 +1,42 @@
+:root {
+    /* Kawaii Light Palette */
+    --bg-primary: #fff0f5; /* Lavender Blush */
+    --bg-secondary: #ffffff;
+    --text-primary: #5c5c5c;
+    --text-secondary: #a0a0a0;
+    --accent-primary: #ffb7b2; /* Pastel Pink */
+    --accent-secondary: #ff9aa2; /* Slightly darker pink */
+    --accent-blue: #c7ceea; /* Periwinkle */
+    --accent-mint: #b5ead7; /* Mint */
+    --accent-yellow: #ffdac1; /* Peach/Yellow */
+
+    --shadow: 0 4px 15px rgba(255, 183, 178, 0.3);
+    --border-radius: 20px;
+    --font-heading: 'Fredoka One', cursive;
+    --font-body: 'Quicksand', sans-serif;
+
+    /* Mascot Colors */
+    --mascot-body: #ffffff;
+    --mascot-features: #5c5c5c;
+    --mascot-blush: #ff9aa2;
+}
+
+[data-theme="dark"] {
+    /* Kawaii Dark/Cyberpunk Palette */
+    --bg-primary: #1a1a2e; /* Deep Blue/Purple */
+    --bg-secondary: #16213e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent-primary: #ff2e63; /* Neon Pink */
+    --accent-secondary: #ff005c;
+    --accent-blue: #08d9d6; /* Neon Cyan */
+    --accent-mint: #00adb5;
+    --accent-yellow: #eaeaea;
+
+    --shadow: 0 4px 15px rgba(255, 46, 99, 0.3);
+
+     /* Mascot Colors */
+    --mascot-body: #e0e0e0;
+    --mascot-features: #1a1a2e;
+    --mascot-blush: #ff2e63;
+}
