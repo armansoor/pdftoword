@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/advanced.css">
     <!-- Google Fonts for Anime Vibe -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
@@ -83,6 +84,59 @@
                         <i class="fas fa-file-pdf"></i> Text to PDF
                     </button>
                 </div>
+
+                <h3>PDF Tools:</h3>
+                <div class="grid">
+                    <button class="option-card" data-action="merge-pdf">
+                        <i class="fas fa-object-group"></i> Merge
+                    </button>
+                    <button class="option-card" data-action="split-pdf">
+                        <i class="fas fa-cut"></i> Split
+                    </button>
+                    <button class="option-card" data-action="organize-pdf">
+                        <i class="fas fa-sort"></i> Organize
+                    </button>
+                    <button class="option-card" data-action="compress-pdf">
+                        <i class="fas fa-compress-arrows-alt"></i> Compress
+                    </button>
+                     <button class="option-card" data-action="protect-pdf">
+                        <i class="fas fa-lock"></i> Protect
+                    </button>
+                    <button class="option-card" data-action="unlock-pdf">
+                        <i class="fas fa-unlock"></i> Unlock
+                    </button>
+                    <button class="option-card" data-action="metadata-pdf">
+                        <i class="fas fa-info-circle"></i> Metadata
+                    </button>
+                    <button class="option-card" data-action="watermark-pdf">
+                        <i class="fas fa-stamp"></i> Watermark
+                    </button>
+                </div>
+
+                <h3>Advanced:</h3>
+                 <div class="grid">
+                    <button class="option-card" data-action="pdf-to-excel">
+                        <i class="fas fa-file-excel"></i> To Excel
+                    </button>
+                     <button class="option-card" data-action="pdf-to-ppt">
+                        <i class="fas fa-file-powerpoint"></i> To PPT
+                    </button>
+                    <button class="option-card" data-action="ocr-pdf">
+                        <i class="fas fa-eye"></i> OCR (Text)
+                    </button>
+                     <button class="option-card" data-action="html-to-pdf">
+                        <i class="fas fa-code"></i> HTML to PDF
+                    </button>
+                     <button class="option-card" data-action="add-page-numbers">
+                        <i class="fas fa-list-ol"></i> Page Numbers
+                    </button>
+                    <button class="option-card" data-action="flatten-pdf">
+                        <i class="fas fa-layer-group"></i> Flatten
+                    </button>
+                    <button class="option-card" data-action="sign-pdf">
+                        <i class="fas fa-signature"></i> Sign PDF
+                    </button>
+                </div>
             </section>
 
              <section class="history-section hidden" id="history-section">
@@ -119,10 +173,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
+    <!-- New Libraries for Enhanced Features -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src='https://unpkg.com/tesseract.js@4.1.1/dist/tesseract.min.js'></script>
+
     <!-- App Scripts -->
     <script src="js/ui.js"></script>
     <script src="js/features.js"></script>
     <script src="js/converter.js"></script>
+    <script src="js/advanced.js"></script>
+    <script src="js/advanced_security.js"></script>
+    <script src="js/advanced_editing.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Register Service Worker

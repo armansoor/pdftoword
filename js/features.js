@@ -70,3 +70,62 @@ window.Features = {
     triggerConfetti,
     modal
 };
+
+// Signature Logic
+const SignaturePad = {
+    canvas: null,
+    ctx: null,
+    isDrawing: false,
+
+    init(container) {
+        this.canvas = document.createElement('canvas');
+        this.canvas.id = 'signature-canvas';
+        this.canvas.width = 400;
+        this.canvas.height = 200;
+        container.appendChild(this.canvas);
+
+        this.ctx = this.canvas.getContext('2d');
+        this.ctx.lineWidth = 2;
+        this.ctx.lineCap = 'round';
+        this.ctx.strokeStyle = '#000';
+
+        this.canvas.addEventListener('mousedown', (e) => this.start(e));
+        this.canvas.addEventListener('mousemove', (e) => this.draw(e));
+        this.canvas.addEventListener('mouseup', () => this.stop());
+        this.canvas.addEventListener('mouseout', () => this.stop());
+
+        // Touch support
+        this.canvas.addEventListener('touchstart', (e) => { e.preventDefault(); this.start(e.touches[0]); });
+        this.canvas.addEventListener('touchmove', (e) => { e.preventDefault(); this.draw(e.touches[0]); });
+        this.canvas.addEventListener('touchend', () => this.stop());
+    },
+
+    start(e) {
+        this.isDrawing = true;
+        const rect = this.canvas.getBoundingClientRect();
+        this.ctx.beginPath();
+        this.ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    },
+
+    draw(e) {
+        if (!this.isDrawing) return;
+        const rect = this.canvas.getBoundingClientRect();
+        this.ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        this.ctx.stroke();
+    },
+
+    stop() {
+        this.isDrawing = false;
+        this.ctx.closePath();
+    },
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+
+    getImage() {
+        return this.canvas.toDataURL('image/png');
+    }
+};
+
+window.SignaturePad = SignaturePad;
