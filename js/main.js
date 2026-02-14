@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveAs(resultBlob, filename);
 
                 UI.updateMascot('All done! Downloading now! 🎉');
+                Features.triggerConfetti();
                 addToHistory(action, file.name);
 
             } catch (error) {

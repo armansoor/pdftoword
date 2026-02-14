@@ -1,6 +1,6 @@
-# Kawaii PDF Converter ✨
+# Magic PDF Converter ✨
 
-A cute, anime-themed PDF tool that runs entirely in your browser! No servers, no uploads, just pure magic.
+A magical PDF tool that runs entirely in your browser! No servers, no uploads, just pure magic.
 
 ## Features 🌟
 
@@ -8,7 +8,7 @@ A cute, anime-themed PDF tool that runs entirely in your browser! No servers, no
 - **Word to PDF**: Turn your documents into PDFs instantly.
 - **Image Magic**: Convert PDF pages to Images (JPG) or Images to PDF.
 - **Text Tools**: Extract text from PDFs or create PDFs from text files.
-- **Theme Toggle**: Switch between "Kawaii Light" (Pastel) and "Cyberpunk Dark" modes.
+- **Theme Toggle**: Switch between "Day Mode" (Bright) and "Night Mode" (Dark).
 - **Offline Capable**: Works without internet once loaded! Installable as an App (PWA).
 - **100% Private**: Your files never leave your device. All processing happens locally in your browser.
 
