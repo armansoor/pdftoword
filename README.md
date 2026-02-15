@@ -2,6 +2,8 @@
 
 A magical PDF tool that runs entirely in your browser! No servers, no uploads, just pure magic.
 
+Try it here : https://armansoor.github.io/pdftoword/
+
 ## Features 🌟
 
 - **PDF to Word**: Convert your PDFs to editable Word documents (Text & Layout preservation).
